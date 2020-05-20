@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+编辑器的使用在ueditor文件下的index.html
+获得内容可以获取文本内容存入数据库
+修改时，从数据库取出后写入内容，若内容没写入，可以考虑以下方法
+
+
+以下是写入内容无法写入时，先延迟再写入可解决
+var newsContent='';
+$(function(){
+window.setTimeout(setContent,1000);//一秒后再调用赋值方法
+});
+
+//给ueditor插入值
+function setContent(){
+var _html = '${pbNews.content}';//$('#pbcontent').html()
+UE.getEditor('editor').execCommand('insertHtml', _html);
+// 获取富文本的内容以填充图文内容
+newsContent = UE.getEditor('editor').getContent();
+}
+
+createEditor();
+
+//创建编辑器
+function createEditor() {
+//			enableBtn();
+var ue =  UE.getEditor('editor');
+
+//			var content = $('#pbcontent').html();
+//			if(content!=''){
+//				ue.execCommand('insertHtml', content);
+//			}
+
+}
+</body>
+</html>
